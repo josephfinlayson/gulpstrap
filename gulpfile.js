@@ -7,10 +7,11 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 
 gulp.task('styles', [], function (cb) {
-    return     gulp.src('app/styles/main.scss')
+    return     gulp.src('app/styles/*.scss')
         .pipe($.rubySass({
             style: 'expanded'
         }))
+        .pipe($.concat('main.css'))
         .pipe(gulp.dest('_site/styles'))
         // cb();
 });
@@ -19,6 +20,7 @@ gulp.task('scripts', function () {
     return gulp.src('app/scripts/**/*.js')
         .pipe($.jshint())
         .pipe($.jshint.reporter($.jshintStylish))
+        .pipe($.concat('main.js'))
         .pipe(gulp.dest('_site/scripts'))
         .pipe($.size());
 });
@@ -32,19 +34,19 @@ gulp.task('jekyll', ['scripts'], function (gulpCallback) {
 });
     
 //what does this do ?
-gulp.task('html', ['jekyll'],    function (cb) {
+gulp.task('html', ['jekyll'], function (cb) {
     // cb();
     var jsFilter = $.filter('_site/*.js');
     var cssFilter = $.filter('_site/*.css');
 
     return gulp.src('_site/*.html')
         .pipe($.useref.assets())
-        .pipe(jsFilter)
-        .pipe($.uglify())
-        .pipe(jsFilter.restore())
-        .pipe(cssFilter)
-        .pipe($.csso())
-        .pipe(cssFilter.restore())
+        // .pipe(jsFilter)
+        // .pipe($.uglify())
+        // .pipe(jsFilter.restore())
+        // .pipe(cssFilter)
+        // .pipe($.csso())
+        // .pipe(cssFilter.restore())
         .pipe($.useref.restore())
         .pipe($.useref())
         .pipe(gulp.dest('_site/'))
