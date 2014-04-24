@@ -1,13 +1,11 @@
 #!/bin/sh
 #
- mv .git/hooks/pre-push .git/hooks/pre-push1
- git branch -D gh-pages
- git push origin :gh-pages
+mv .git/hooks/pre-push .git/hooks/pre-push1
+git branch -D gh-pages
+git push origin :gh-pages
 git checkout -b gh-pages
 mkdir ../temp_folder
-
 mv _site ../temp_folder/
-touch ../testworked1	
 rm -r *
 mv ../temp_folder/_site/* .
 rm -r ../temp_folder
@@ -15,4 +13,4 @@ git add .
 git commit -am "`date` automatic page push"
 git push origin gh-pages
 git checkout master
- mv .git/hooks/pre-push1 .git/hooks/pre-push
+mv .git/hooks/pre-push1 .git/hooks/pre-push
