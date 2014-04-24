@@ -1,3 +1,9 @@
+// 'use strict';
+console.log('goodbye!');
+
+// $(document).ready(function($) {
+// 	console.log("hello")	
+// });
 /*
  * For font license information, see the CSS file loaded by this JavaScript.
  */
