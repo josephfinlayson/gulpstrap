@@ -3,6 +3,4 @@ dist
 .tmp
 .sass-cache
 app/bower_components
-
-_site/
 test/bower_components
